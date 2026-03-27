@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leisure Stock Check</title>
+
+<style>
+    body {
+        font-family: Arial;
+        background: #f6f6f6;
+        margin: 0;
+        padding: 10px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #5c3c24;
+        font-size: 22px;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+        width: 140px;
+    }
+
+    .card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .form-top input {
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .table-container {
+        overflow-x: auto; /* เลื่อนซ้ายขวาได้ */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; /* กันบีบ */
+    }
+
+    th, td {
+        border: 1px solid #8B4513;
+        padding: 8px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    th {
+        background: #ddd;
+    }
+
+    input.qty {
+        width: 60px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        background: #5c3c24;
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+<img src="logo.png">
+<h1>Leisure Stock Check</h1>
+
+<div class="card" id="captureArea">
+
+    <div class="form-top">
+        <input type="date" id="date">
+        <input type="text" id="checker" placeholder="ผู้เช็คสต๊อก">
+    </div>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>ลำดับ</th>
+                <th>สินค้า</th>
+                <th>หน่วย</th>
+                <th>คงเหลือ</th>
+                <th>หมายเหตุ</th>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>Loas-M</td>
+                <td>ถุง</td>
+                <td><input type="number" class="qty"></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Loas-MD</td>
+                <td>กรัม</td>
+                <td><input type="number" class="qty"></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Blend-1</td>
+                <td>กรัม</td>
+                <td><input type="number" class="qty"></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>Blueberry</td>
+                <td>กรัม</td>
+                <td><input type="number" class="qty"></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td>Lampang</td>
+                <td>กรัม</td>
+                <td><input type="number" class="qty"></td>
+                <td><input type="text"></td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+<button onclick="saveAsImage()">📸 Save Report (JPEG)</button>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+function saveAsImage() {
+
+    const date = document.getElementById("date").value;
+    const checker = document.getElementById("checker").value;
+
+    if (!date || !checker) {
+        alert("กรุณากรอก วันที่ และ ผู้เช็คสต๊อก");
+        return;
+    }
+
+    html2canvas(document.getElementById("captureArea")).then(canvas => {
+        let link = document.createElement("a");
+        link.download = "stock_report.jpg";
+        link.href = canvas.toDataURL("image/jpeg");
+        link.click();
+    });
+}
+</script>
+
+</body>
+</html>
